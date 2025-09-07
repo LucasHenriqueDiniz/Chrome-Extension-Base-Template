@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "LinkedIn Apply Helper",
+  "version": "0.1.0",
+  "description": "Assistente para seleção e navegação de candidaturas (com confirmação).",
+  "permissions": ["storage", "scripting", "activeTab"],
+  "host_permissions": ["https://www.linkedin.com/*"],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.linkedin.com/jobs/search/*"],
+      "js": ["content-list.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://www.linkedin.com/jobs/view/*"],
+      "js": ["content-view.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
